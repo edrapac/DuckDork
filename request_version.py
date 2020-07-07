@@ -38,10 +38,7 @@ def get(dork):
 		for i in range(len(base_text)):
 			result_text= base_text[i].text
 			first_request.setdefault(base_text[i].attrs['href'],[]).append(result_text)
-		for keys, values in first_request.items():
-			print(value[0])
-			print(key)
-			print(value[1]+'\n\n')
+		
 	
 	else: #call a second method, use the post params as a initial value
 		vqd=soup.find("input",{'name':'vqd'}).attrs['value']
@@ -56,7 +53,7 @@ def get(dork):
 		
 		#Make initial POST request and get back the blob of data we want 
 		for i in range(args.results):
-			print('post params being used ',postParams)
+			# print('post params being used ',postParams)
 			x=requests.post(postURL,headers=headers,data=postParams)
 			results = BeautifulSoup(x.text,'lxml')
 			base_results=results.find_all('a',{'class':'result__a'})
@@ -78,13 +75,17 @@ def get(dork):
 			#TODO FIX ME THIS IS FINDING THE BACK BUTTON FIRST! 
 			#update the postParams that allow us to POST again. Sorta repeating ourselves but not a better way to do this atm
 			vqd=results.find("input",{'name':'vqd'}).attrs['value']
-			s=results.find("input",{'name':'s'}).attrs['value'] # starts at 30 and increases by 50, num of items returned per search
+			s=max([element.get('value') for element in results.find_all("input",{'name':'s'})]) # starts at 30 and increases by 50, num of items returned per search
 			nextParams=''
 			v='l'
 			o='json'
-			dc=results.find("input",{'name':'dc'}).attrs['value']
+			dc=max([element.get('value') for element in results.find_all("input",{'name':'dc'})])
 			postParams = {'vqd':vqd,'q':dork,'s':s,'nextParams':'','v':'l','o':'json','dc':dc,'api':'/d.js'} # update our parameters
-			print(results)
+			# print(postParams)
+	for keys, values in first_request.items():
+		print(values[0])
+		print(keys)
+		print(values[1]+'\n\n')
 '''
 def update(postParams,dork):
 	#Make initial request and get back the blob of data we want 
