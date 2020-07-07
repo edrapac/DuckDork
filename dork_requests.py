@@ -105,7 +105,6 @@ def get(dork):
 			# in the event of an error, print what we have
 			print("Returning first page of results now...")
 			for keys, values in first_request.items():
-				print('reached')
 				print(values[0])
 				print(keys)
 				print(values[1]+'\n\n')
