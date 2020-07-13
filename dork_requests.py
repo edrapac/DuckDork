@@ -23,7 +23,7 @@ def get(dork):
 		else:
 			dork = '\"'+args.dork+'\"'
 	else:
-		dork=args.dork
+		dork=args.dork # unless exact is specified requessts does NOT require encapsulating the search term in quotes
 	mydict={'q':dork}
 	base_url = 'https://html.duckduckgo.com/html'
 	get_request=requests.get(base_url,headers=headers,params=mydict)
@@ -46,7 +46,8 @@ def get(dork):
 	for i in range(len(base_text)):
 		result_text= base_text[i].text
 		first_request.setdefault(base_text[i].attrs['href'],[]).append(result_text)
-
+	if not args.results:
+		args.results=1 # if you goof and forget to supply num results 
 	if args.results <=1: # if the user wants only 1 page of results returned
 		for keys, values in first_request.items():
 			print(values[0])
