@@ -1,0 +1,5 @@
+intitle:index.of people.lst
+inurl:passlist.txt
+intitle:"index of" intext:globals.inc
+filetype:reg reg +intext:"defaultusername" +intext:"defaultpassword"
+filetype:url +inurl:"ftp://" +inurl:"@"
