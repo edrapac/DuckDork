@@ -81,6 +81,7 @@ if [ "$numdorks" -le  "$filelen" ] && [ "$numdorks" -ge 1 ]; then
 
 elif [[ "$numdorks" < 1 ]]; then
 	echo 'must be a positive number'
+	
 else
 	echo 'using entire file of dorks'
 	echo -ne "$(while read line; do python3 dork_requests.py "'$line'"; done < "$file")\n"
