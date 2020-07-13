@@ -31,7 +31,38 @@ Category: '
 
 read category
 
-echo "You chose: $category"
+case "$category" in
+	'1' )
+	file="dorks/footholds.dorks"	;;
+	'2' )
+	file="dorks/files_containing_usernames.dorks"	;;
+	'3' )
+	file="dorks/sensitive_directories.dorks"	;;
+	'4' )
+	file="dorks/web_server_detection.dorks"	;;
+	'5' )
+	file="dorks/vulnerable_files.dorks"	;;
+	'6' )
+	file="dorks/vulnerable_servers.dorks"	;;
+	'7' )
+	file="dorks/error_messages.dorks"	;;
+	'8' )
+	file="dorks/files_containing_juicy_info.dorks"	;;
+	'9' )
+	file="dorks/files_containing_passwords.dorks"	;;
+	'10' )
+	file="dorks/sensitive_online_shopping_info.dorks"	;;
+	'11' )
+	file="dorks/network_or_vulnerability_data.dorks"	;;
+	'12' )
+	file="dorks/pages_containing_login_portals.dorks"	;;
+	'13' )
+	file="dorks/various_online_devices.dorks"	;;
+	'14' )
+	file="dorks/advisories_and_vulnerabilities.dorks"	;;
+
+esac
+
 
 echo -ne 'Next, choose how many dorks from a category you would like to use. It must be a positive integer, or you can type all to use all dorks in the file\n
 Number of dorks: '
@@ -39,16 +70,19 @@ Number of dorks: '
 read numdorks
 
 echo "You chose $numdorks Dorks"
-filelen=$(wc -l dorks/files_containing_passwords.dorks | awk -F ' ' '{print $1}')
+filelen=$(wc -l "$file" | awk -F ' ' '{print $1}')
+
 
 if [ "$numdorks" -le  "$filelen" ] && [ "$numdorks" -ge 1 ]; then 
-	head -n "$numdorks" dorks/files_containing_passwords.dorks > temp
+	head -n "$numdorks" "$file" > temp
 	cat temp
 	echo -ne "$(while read line; do python3 dork_requests.py "'$line'"; done < temp)\n"; 
 	rm temp
+
 elif [[ "$numdorks" < 1 ]]; then
 	echo 'must be a positive number'
 else
 	echo 'using entire file of dorks'
-	echo -ne "$(while read line; do python3 dork_requests.py "'$line'"; done < dorks/test)\n"
+	echo -ne "$(while read line; do python3 dork_requests.py "'$line'"; done < "$file")\n"
+	rm temp
 fi
