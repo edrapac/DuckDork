@@ -44,4 +44,14 @@ If you want to search for something that has whitespace such as `allintext:steve
 
 `python3 dork_requests.py 'allintext:steve jobs'`
 
+Exact queries, which force DuckDuckGo to only search exact matches on the query string can be enforced by passing the `y` argument. Please note that you *must* specify how many pages you want back. An exact search for a term like `allintext:apple` would thus look like 
 
+`python3 dork_requests.py allintext:apple 1 y` which would be the eqivalent of typing "allintext:apple" into the DuckDuckGo search bar
+
+### dork_selenium.py
+
+The same options as above but remember you need the gecko driver installed,for this reason it is recommended the dork_requests.py script be used
+
+### Quickstart.sh
+
+Just follow the on screen prompts!!
