@@ -44,11 +44,11 @@ filelen=$(wc -l dorks/files_containing_passwords.dorks | awk -F ' ' '{print $1}'
 if [ "$numdorks" -le  "$filelen" ] && [ "$numdorks" -ge 1 ]; then 
 	head -n "$numdorks" dorks/files_containing_passwords.dorks > temp
 	cat temp
-	echo -ne "$(while read line; do python3 dork_requests.py "$line"; done < temp)\n"; 
+	echo -ne "$(while read line; do python3 dork_requests.py "'$line'"; done < temp)\n"; 
 	rm temp
 elif [[ "$numdorks" < 1 ]]; then
 	echo 'must be a positive number'
 else
 	echo 'using entire file of dorks'
-	echo -ne "$(while read line; do python3 dork_requests.py "$line"; done < dorks/files_containing_passwords.dorks)\n"
+	echo -ne "$(while read line; do python3 dork_requests.py "'$line'"; done < dorks/test)\n"
 fi
