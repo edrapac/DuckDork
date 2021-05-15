@@ -23,7 +23,7 @@ print("Searching, please be patient this may take a little while\n\n")
 opts = Options()
 opts.set_headless()
 assert opts.headless
-browser = Firefox(executable_path="/Users/edrapac/Documents/git/DuckDork/geckodriver",options=opts)
+browser = Firefox(executable_path="PATH TO GECKODRIVER",options=opts)
 browser.get(base_url)
 browser.implicitly_wait(5)
 
